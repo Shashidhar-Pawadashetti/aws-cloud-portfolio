@@ -35,21 +35,23 @@ You can follow my professional journey and day-to-day takeaways on [LinkedIn](ht
 
 ## AWS Projects
 
-### Project 1: Static Website Hosting on S3
+### Project 1: Launching a Secure EC2 Virtual Server
 
-* **Objective:** To deploy a secure, fast, and highly-available static website (HTML/CSS/JS) using core AWS services.
+* **Objective:** To launch a "virtual server" (EC2 Instance) in the AWS cloud and establish a secure remote connection to it from my Windows machine.
 * **Services Used:**
-    * `Amazon S3`: To host the static website files.
-    * `Amazon CloudFront`: To act as a global Content Delivery Network (CDN) for low latency and to secure the site with HTTPS.
-    * `AWS Certificate Manager (ACM)`: To provision a free SSL/TLS certificate for HTTPS.
-    * `Amazon Route 53`: (Optional) To manage a custom domain name for the website.
-* **Architecture Diagram:**
-    * (Coming Soon - *Tip: When you make one, add a screenshot here!*)
+    * `Amazon EC2 (Elastic Compute Cloud)`: To provision the virtual server (a `t2.micro` instance on Amazon Linux).
+    * `EC2 Key Pair`: To create a `.pem` file used to securely authenticate my SSH connection.
+    * `Security Groups`: To act as a virtual firewall for the instance.
+* **What I Did:**
+    1.  Launched a free-tier eligible `t2.micro` EC2 instance.
+    2.  Created a new Key Pair and securely downloaded the `.pem` file.
+    3.  Configured the instance's **Security Group** to allow **SSH (port 22)** traffic *only* from my personal IP address. (This is a critical security step!)
+    4.  Used **OpenSSH** (which is built into Windows Terminal/PowerShell) to connect to my instance using the `ssh` command.
 * **What I Learned:**
-    * How to configure an S3 bucket for static website hosting.
-    * The difference between a website endpoint and a regular S3 endpoint.
-    * How to set up a CloudFront distribution to "front" the S3 bucket, which is the best practice for security and performance.
-    * How to link a custom domain and apply an SSL certificate for a professional, secure site.
+    * EC2 is the core "Infrastructure as a Service" (IaaS) offering from AWS.
+    * A Security Group acts as a *stateful firewall* for an instance. By default, it blocks all incoming traffic, and you must explicitly "allow" ports.
+    * A Key Pair is the secure way to "log in" to a Linux server, replacing a traditional password.
+    * Modern Windows (10/11) no longer requires PuTTY for SSH, making the `ssh -i "key.pem" ec2-user@<ip-address>` command a fast and standard way to connect.
 
 ---
 
