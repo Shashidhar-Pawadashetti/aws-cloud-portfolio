@@ -55,6 +55,26 @@ You can follow my professional journey and day-to-day takeaways on [LinkedIn](ht
 
 ---
 
+### Project 2: Launching a Secure EC2 Virtual Server
+
+* **Objective:** To launch a "virtual server" (EC2 Instance) in the AWS cloud and establish a secure remote connection to it from my Windows machine.
+* **Services Used:**
+    * `Amazon EC2 (Elastic Compute Cloud)`: To provision the virtual server (a `t2.micro` instance on Amazon Linux).
+    * `EC2 Key Pair`: To create a `.pem` file used to securely authenticate my SSH connection.
+    * `Security Groups`: To act as a virtual firewall for the instance.
+* **What I Did:**
+    1.  Launched a free-tier eligible `t2.micro` EC2 instance.
+    2.  Created a new Key Pair and securely downloaded the `.pem` file.
+    3.  Configured the instance's **Security Group** to allow **SSH (port 22)** traffic *only* from my personal IP address. (This is a critical security step!)
+    4.  Used **OpenSSH** (which is built into Windows Terminal/PowerShell) to connect to my instance using the `ssh` command.
+* **What I Learned:**
+    * EC2 is the core "Infrastructure as a Service" (IaaS) offering from AWS.
+    * A Security Group acts as a *stateful firewall* for an instance. By default, it blocks all incoming traffic, and you must explicitly "allow" ports.
+    * A Key Pair is the secure way to "log in" to a Linux server, replacing a traditional password.
+    * Modern Windows (10/11) no longer requires PuTTY for SSH, making the `ssh -i "key.pem" ec2-user@<ip-address>` command a fast and standard way to connect.
+
+---
+
 ### Project 2: 3-Tier Web Application VPC
 
 * **Objective:** To design and build a foundational, secure, and scalable network infrastructure in AWS to host a classic 3-tier application (Web, App, Database).
