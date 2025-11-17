@@ -74,6 +74,23 @@ You can follow my professional journey and day-to-day takeaways on [LinkedIn](ht
     * Modern Windows (10/11) no longer requires PuTTY for SSH, making the `ssh -i "key.pem" ec2-user@<ip-address>` command a fast and standard way to connect.
 
 ---
+### Project 3: EC2 Advanced Design Patterns
+
+* **Objective:** To move beyond a single instance and learn to design EC2 solutions optimized for specific workloads (high availability, high performance, or cost-efficiency).
+* **Services/Features Studied:**
+    * `EC2 IP Addressing`: Public, Private, and Elastic IPs
+    * `EC2 Placement Groups`: Cluster, Spread, and Partition
+    * `Elastic Network Interfaces (ENI)`
+    * `EC2 Hibernate`
+* **What I Learned (Key Architectural Takeaways):**
+    * **IP Addressing:** I learned the *purpose* of each IP type. A **Public IP** is temporary and fine for testing. A **Private IP** is for internal communication (e.g., your app server talking to your database). An **Elastic IP** is essential for production, giving your server a permanent, static public address that you can re-map if an instance fails.
+    * **Placement Groups (Performance vs. Availability):** This was a major "aha!" moment.
+        * **Spread Group:** I used this to deploy instances on different physical hardware. This is the **best choice for high availability** for a critical application.
+        * **Cluster Group:** I used this to co-locate instances in the same rack for extremely low-latency, high-throughput communication. This is ideal for **High-Performance Computing (HPC)**.
+    * **Elastic Network Interface (ENI):** I learned an ENI is a virtual network card. The key feature is that you can **detach it from a failed instance and re-attach it to a new one**, allowing you to transfer its private IP, elastic IP, and MAC address. This is a powerful tool for building failover solutions.
+    * **EC2 Hibernate:** I practiced hibernating an instance. This saves the contents of the instance's RAM to the EBS root volume, allowing for a much faster "boot-up" than a full restart. This is a great **cost-saving and efficiency tool** for applications that take a long time to initialize.
+
+---
 
 ### Project 2: 3-Tier Web Application VPC
 
