@@ -92,6 +92,26 @@ You can follow my professional journey and day-to-day takeaways on [LinkedIn](ht
 
 ---
 
+### Project 3: Managing Persistent Storage with EBS
+
+* **Objective:** To understand how to manage data persistence in AWS using Elastic Block Store (EBS) and protect data using Snapshots.
+* **Services Studied:**
+    * `Amazon EBS (Elastic Block Store)`: Network-attached, persistent block storage.
+    * `EBS Snapshots`: Point-in-time backups.
+    * `Instance Store`: Ephemeral, physically attached storage (Theory).
+* **What I Did:**
+    1.  **Created a new EBS Volume** (General Purpose gp3) in the same Availability Zone as my EC2 instance.
+    2.  **Attached the Volume** to the running instance on the fly.
+    3.  **Created a Snapshot** of the volume to create a backup.
+    4.  **Restored a Snapshot:** I simulated a disaster recovery scenario by creating a *new* volume from that snapshot.
+* **What I Learned:**
+    * **The "Network Drive" Concept:** EBS is like a USB stick plugged in over the network. It allows data to persist even if the EC2 instance is stopped or terminated (unlike Instance Store, where data is lost if the instance stops).
+    * **Availability Zone Lock:** This was a key learning—an EBS volume is **locked** to a specific Availability Zone (e.g., `us-east-1a`). You cannot attach a volume in `1a` to an instance in `1b` directly.
+    * **Snapshot Utility:** To move a volume to a different AZ, you must take a Snapshot, and then create a new volume from that Snapshot in the target AZ.
+    * **Incremental Backups:** EBS Snapshots are "incremental"—meaning the second snapshot only saves the data that changed since the first one, which saves storage costs.
+
+---
+
 ### Project 2: 3-Tier Web Application VPC
 
 * **Objective:** To design and build a foundational, secure, and scalable network infrastructure in AWS to host a classic 3-tier application (Web, App, Database).
