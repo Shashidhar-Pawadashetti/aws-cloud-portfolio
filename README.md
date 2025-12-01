@@ -111,6 +111,28 @@ You can follow my professional journey and day-to-day takeaways on [LinkedIn](ht
     * **Incremental Backups:** EBS Snapshots are "incremental"—meaning the second snapshot only saves the data that changed since the first one, which saves storage costs.
 
 ---
+### Project 4: Advanced Storage Strategies & Custom Images (AMIs)
+
+* **Objective:** To master the different storage options in AWS (Block vs. File vs. Ephemeral) and learn to create "Golden Images" for rapid deployment.
+* **Services Studied:**
+    * `Amazon Machine Images (AMI)`: Creating custom boot images.
+    * `EC2 Instance Store`: High-performance, ephemeral block storage.
+    * `Amazon EFS (Elastic File System)`: Scalable, shared network file storage.
+    * `EBS Features`: Volume Types (gp3, io2), Multi-Attach, and Encryption.
+* **What I Did:**
+    1.  **Created a Custom AMI:** I configured an EC2 instance with specific web server settings, created an image from it, and launched a *new* instance from that AMI. This proved that AMIs preserve software configurations.
+    2.  **Mounted an EFS File System:** I created an EFS file system and mounted it to *two different* EC2 instances in *different* Availability Zones simultaneously.
+    3.  **Simulated Ephemeral Data Loss:** I launched an instance with Instance Store, saved a file, and stopped the instance. Upon restarting, I verified the data was gone (as expected for ephemeral storage).
+* **What I Learned:**
+    * **AMI Strategy:** creating a "Golden Image" drastically reduces boot time because software comes pre-installed.
+    * **Storage Hierarchy:**
+        * **EBS:** "Network USB stick." Persistent, usually attached to one instance. Great for databases.
+        * **EFS:** "Network Shared Drive." Shared across hundreds of instances and multiple AZs. Great for CMS (WordPress) or shared repositories.
+        * **Instance Store:** "Physical Hard Drive." Extremely fast (physically attached), but **ephemeral** (data dies when the server stops). Great for caching or buffers.
+    * **EBS Multi-Attach:** A niche feature for `io1`/`io2` volumes allowing one volume to attach to multiple instances in the *same* AZ (used for clustered apps).
+    * **Encryption:** EBS encryption is seamless; it encrypts data at rest and in transit with zero performance impact.
+
+---
 
 ### Project 2: 3-Tier Web Application VPC
 
