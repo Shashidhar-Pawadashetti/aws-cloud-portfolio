@@ -134,18 +134,29 @@ You can follow my professional journey and day-to-day takeaways on [LinkedIn](ht
 
 ---
 
-### Project 2: 3-Tier Web Application VPC
+### Project 5: High Availability & Scalability with ELB and ASG
 
-* **Objective:** To design and build a foundational, secure, and scalable network infrastructure in AWS to host a classic 3-tier application (Web, App, Database).
-* **Services Used:**
-    * `Amazon VPC`: To create a logically isolated virtual network.
-    * `Subnets`: Created public subnets for web-facing resources (like load balancers) and private subnets for internal resources (like application servers and databases).
-    * `Route Tables`: Configured routing for public subnets (via an Internet Gateway) and private subnets (via a NAT Gateway).
-    * `Security Groups`: Acted as a stateful firewall for EC2 instances.
-    * `NACLs`: Acted as a stateless firewall for the subnets.
-* **Architecture Diagram:**
-    * (Coming Soon - *This is a great one to draw and upload!*)
+* **Objective:** To build a robust, fault-tolerant web application that automatically scales up during high traffic and heals itself if a server fails.
+* **Services Studied:**
+    * `Elastic Load Balancing (ELB)`: ALB (Layer 7), NLB (Layer 4), and GWLB (Layer 3).
+    * `Auto Scaling Groups (ASG)`: Automatic scaling and health checks.
+* **What I Did:**
+    1.  **Created a Target Group:** I launched multiple EC2 instances with a simple web server and registered them as targets.
+    2.  **Deployed an Application Load Balancer (ALB):** I configured an internet-facing ALB to distribute traffic across my instances in different Availability Zones.
+    3.  **configured Health Checks:** I set up the ALB to "ping" my instances on `/index.html`. I simulated a failure by stopping the web server on one instance, and watched the ALB automatically stop sending traffic to it.
+    4.  **Built an Auto Scaling Group (ASG):**
+        * Created a **Launch Template** defining the instance config (AMI, Instance Type, Security Groups).
+        * Configured the ASG to maintain a minimum of 2 instances and a maximum of 4.
+        * Set up a **Dynamic Scaling Policy** (Target Tracking) to scale out if average CPU usage goes above 50%.
 * **What I Learned:**
+    * **Scalability vs. High Availability:** Scalability is about handling load (vertical vs. horizontal), while High Availability is about surviving failure (running across at least 2 AZs).
+    * **The Load Balancer Types:**
+        * **ALB:** Great for HTTP/HTTPS traffic, path-based routing, and microservices.
+        * **NLB:** Built for extreme performance (millions of requests/sec) and static IPs.
+        * **GWLB:** specialized for third-party virtual appliances (firewalls, etc.).
+    * **The Power of ASG:** It’s not just for scaling; it’s for *health*. If an instance is terminated, the ASG automatically launches a replacement to maintain the "Desired Capacity."
+
+---
     * The critical importance of a "defense in depth" security model.
     * How to control inbound and outbound traffic using Security Groups (for instances) and NACLs (for subnets).
     * The difference between a public and private subnet and why it's the most important concept in cloud security.
