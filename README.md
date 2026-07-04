@@ -1,4 +1,4 @@
-# Shashidhar's AWS Cloud Engineering Portfolio
+# My AWS Cloud Engineering Portfolio
 
 Hello! I'm a Computer Science student currently on a journey to become an **AWS Certified Solutions Architect**. This repository serves as a living portfolio of all the hands-on projects, labs, and architecture patterns I am learning and building.
 
